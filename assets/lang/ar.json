@@ -1,8 +1,11 @@
 {
     "appTitle": "ترستو برجر",
-    "categories": "التصنيفات",
-    "cart": "عربة التسوق",
-    "addToCart": "أضف إلى السلة",
-    "totalPrice": "السعر الإجمالي",
-    "guestLogin": "متابعة كزائر"
+    "dushka_offers": "عروض دوشكا برجر",
+    "app_offers": "عروض الابلكيشن",
+    "home": "الرئيسية",
+    "menu": "القائمة",
+    "offers": "العروض",
+    "account": "الحساب",
+    "currency": "ج.م",
+    "addToCart": "أضف"
 }
