@@ -1,8 +1,11 @@
 {
     "appTitle": "Trusto Burger",
-    "categories": "Categories",
-    "cart": "Cart",
-    "addToCart": "Add to Cart",
-    "totalPrice": "Total Price",
-    "guestLogin": "Continue as Guest"
+    "dushka_offers": "Dushka Burger Offers",
+    "app_offers": "App Offers",
+    "home": "Home",
+    "menu": "Menu",
+    "offers": "Offers",
+    "account": "Account",
+    "currency": "EGP",
+    "addToCart": "Add"
 }
