@@ -1,5 +1,4 @@
 import 'package:dushka_burger/core/extensions/size_config_extension.dart';
-import 'package:dushka_burger/core/theming/app_colors.dart';
 import 'package:dushka_burger/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:dushka_burger/features/menu/presentation/manager/change_category_cubit/change_category_cubit.dart';
 import 'package:dushka_burger/features/menu/presentation/views/widgets/category_header_Sec.dart';
@@ -15,9 +14,7 @@ class CategoryView extends StatelessWidget {
     return BlocProvider(
       create: (context) => CategoryCubit(),
       child: Scaffold(
-        backgroundColor: AppColors.backgroundBeige,
         body: SafeArea(
-          bottom: false,
           child: Stack(
             children: [
               BlocBuilder<CategoryCubit, CategoryState>(

@@ -7,5 +7,8 @@
     "offers": "Offers",
     "account": "Account",
     "currency": "EGP",
-    "addToCart": "Add"
+    "addToCart": "Add",
+    "product_details": "Product Details",
+    "back": "Back",
+    "add_to_cart": "Add To Cart"
 }

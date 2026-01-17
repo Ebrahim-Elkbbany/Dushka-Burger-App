@@ -20,7 +20,6 @@ class CategoryHeaderSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // نمرر القيم للتبويبات
         TopCategoryTabs(
           selectedIndex: selectedIndex,
           onTabChanged: onTabChanged,
@@ -29,7 +28,6 @@ class CategoryHeaderSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: context.w(20)),
           child: Text(
-            // تغيير العنوان بناءً على الاختيار
             selectedIndex == 0 
                 ? getLang(context, "dushka_offers") 
                 : getLang(context, "app_offers"),
