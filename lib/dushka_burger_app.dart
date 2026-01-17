@@ -1,5 +1,6 @@
+import 'package:dushka_burger/core/theming/app_theme.dart';
 import 'package:dushka_burger/core/utils/app_locale.dart';
-import 'package:dushka_burger/features/menu/presentation/views/category_view.dart';
+import 'package:dushka_burger/features/menu/presentation/views/product_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -17,7 +18,7 @@ class DushkaBurgerApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [Locale('en', 'US'), Locale('ar', 'EG')],
-      locale: const Locale('ar', 'EG'),
+      locale: const Locale('en', 'US'),
       // localeResolutionCallback: (deviceLocale, supportedLocales) {
       //   if (deviceLocale != null) {
       //     for (var locale in supportedLocales) {
@@ -28,11 +29,8 @@ class DushkaBurgerApp extends StatelessWidget {
       //   }
       //   return supportedLocales.first;
       // },
-      theme: ThemeData(
-        fontFamily: 'Cairo',
-        scaffoldBackgroundColor: const Color(0xFFF9F3EE),
-      ),
-      home: const CategoryView(),
+      theme: AppThemes.light,
+      home: const ProductDetailsView(),
     );
   }
 }

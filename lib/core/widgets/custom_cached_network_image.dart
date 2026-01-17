@@ -39,7 +39,6 @@ class CustomCachedNetworkImage extends StatelessWidget {
             child: CircularProgressIndicator(strokeWidth: 2),
           ),
         ),
-        // شكل الخطأ
         errorWidget: (context, url, error) => _buildErrorWidget(),
       ),
     );

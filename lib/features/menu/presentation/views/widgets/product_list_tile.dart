@@ -28,25 +28,12 @@ class ProductListTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(context.w(12)),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 5,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: CustomCachedNetworkImage(
-              imageUrl: imageUrl,
-              width: context.w(80),
-              height: context.h(70),
-              fit: BoxFit.contain,
-              radius: context.w(12),
-            ),
+          CustomCachedNetworkImage(
+            imageUrl: imageUrl,
+            width: context.w(80),
+            height: context.h(80),
+            fit: BoxFit.contain,
+            radius: context.w(16),
           ),
           context.gapW(12),
           Expanded(
@@ -71,13 +58,17 @@ class ProductListTile extends StatelessWidget {
           InkWell(
             onTap: onAddTap,
             child: Container(
-              width: context.w(35),
-              height: context.w(35),
+              width: context.w(25),
+              height: context.w(25),
               decoration: const BoxDecoration(
                 color: AppColors.primaryRed,
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.add, color: Colors.white, size: context.sp(24)),
+              child: Icon(
+                Icons.add,
+                color: AppColors.white,
+                size: context.sp(18),
+              ),
             ),
           ),
         ],
