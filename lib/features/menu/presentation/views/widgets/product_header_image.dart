@@ -3,7 +3,9 @@ import 'package:dushka_burger/core/widgets/custom_cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ProductHeaderImage extends StatelessWidget {
-  const ProductHeaderImage({super.key});
+  final String imageUrl;
+
+  const ProductHeaderImage({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +14,7 @@ class ProductHeaderImage extends StatelessWidget {
       width: double.infinity,
       height: context.h(300),
       fit: BoxFit.cover,
-      imageUrl:
-          'https://dushkaburger.com/wp-content/uploads/2026/01/Big-Bite-Box.jpg',
+      imageUrl: imageUrl,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:dushka_burger/core/di/service_locator.dart';
 import 'package:dushka_burger/core/extensions/size_config_extension.dart';
 import 'package:dushka_burger/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:dushka_burger/features/menu/presentation/manager/change_category_cubit/change_category_cubit.dart';
@@ -12,33 +13,55 @@ class CategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CategoryCubit(),
+      create: (context) => CategoryCubit(getCategoriesUseCase: sl()),
       child: Scaffold(
         body: SafeArea(
           child: Stack(
             children: [
               BlocBuilder<CategoryCubit, CategoryState>(
                 builder: (context, state) {
-                  int selectedIndex = 0;
-                  List<Map<String, String>> products = [];
-                  if (state is CategoryUpdated) {
-                    selectedIndex = state.selectedIndex;
-                    products = state.products;
+                  if (state is CategoryLoading) {
+                    return const Center(child: CircularProgressIndicator());
                   }
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      context.gapH(10),
-                      CategoryHeaderSection(
-                        selectedIndex: selectedIndex,
-                        onTabChanged: (index) {
-                          context.read<CategoryCubit>().changeTab(index);
-                        },
+
+                  if (state is CategoryError) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(state.message),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<CategoryCubit>().loadCategories();
+                            },
+                            child: const Text('Retry'),
+                          ),
+                        ],
                       ),
-                      context.gapH(5),
-                      Expanded(child: ProductsListSection(products: products)),
-                    ],
-                  );
+                    );
+                  }
+
+                  if (state is CategoryLoaded) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        context.gapH(10),
+                        CategoryHeaderSection(
+                          categories: state.categories,
+                          selectedIndex: state.selectedIndex,
+                          onTabChanged: (index) {
+                            context.read<CategoryCubit>().changeTab(index);
+                          },
+                        ),
+                        context.gapH(5),
+                        Expanded(
+                          child: ProductsListSection(products: state.products),
+                        ),
+                      ],
+                    );
+                  }
+
+                  return const SizedBox.shrink();
                 },
               ),
               const Positioned(
