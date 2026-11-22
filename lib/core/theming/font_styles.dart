@@ -42,4 +42,10 @@ class AppTextStyles {
     fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
     color: isSelected ? AppColors.primaryBrown : AppColors.gray,
   );
+
+  static TextStyle buttonText(BuildContext context) => GoogleFonts.cairo(
+    fontSize: context.sp(16),
+    fontWeight: FontWeight.bold,
+    color: AppColors.white,
+  );
 }

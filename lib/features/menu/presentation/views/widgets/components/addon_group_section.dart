@@ -8,11 +8,13 @@ class AddonGroupSection extends StatelessWidget {
   final String title;
   final bool isRequired;
   final List<AddonOption> options;
+  final Function(int)? onOptionTapped;
 
   const AddonGroupSection({
     required this.title,
     required this.isRequired,
     required this.options,
+    this.onOptionTapped,
     super.key,
   });
 
@@ -38,13 +40,13 @@ class AddonGroupSection extends StatelessWidget {
           ),
         ),
         context.gapH(10),
-        ...options.map(
-          (option) => AddonItemRow(
-            name: option.name,
-            price: option.price,
-            isSelected: option.isSelected,
+        ...options.asMap().entries.map(
+          (entry) => AddonItemRow(
+            name: entry.value.name,
+            price: entry.value.price,
+            isSelected: entry.value.isSelected,
             onTap: () {
-              // TODO: Handle selection
+              onOptionTapped?.call(entry.key);
             },
           ),
         ),
