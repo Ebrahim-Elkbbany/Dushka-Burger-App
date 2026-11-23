@@ -1,48 +1,46 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dushka_burger/core/use_case/use_case.dart';
+import 'package:dushka_burger/features/menu/domain/entities/category_entity.dart';
+import 'package:dushka_burger/features/menu/domain/use_cases/get_categories_use_case.dart';
 
 part 'change_category_state.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {
-  CategoryCubit() : super(CategoryInitial()) {
-    // عند البداية، اعرض القائمة الأولى
-    changeTab(0);
+  final GetCategoriesUseCase getCategoriesUseCase;
+  List<CategoryEntity> _categories = [];
+
+  CategoryCubit({required this.getCategoriesUseCase})
+    : super(CategoryInitial()) {
+    loadCategories();
   }
 
-  // الداتا (لاحقاً ستأتي من API)
-  final List<Map<String, String>> _dushkaOffers = [
-    {
-      "name": "بيج بايت بوكس",
-      "price": "249",
-      "image":
-          "https://dushkaburger.com/wp-content/uploads/2026/01/Big-Bite-Box.jpg",
-    },
-    {
-      "name": "تشيز أوفرلود بوكس",
-      "price": "179",
-      "image":
-          "https://dushkaburger.com/wp-content/uploads/2026/01/Cheese-Overload-Box.jpg",
-    },
-  ];
+  Future<void> loadCategories() async {
+    emit(CategoryLoading());
 
-  final List<Map<String, String>> _appOffers = [
-    {
-      "name": "عرض الصحاب",
-      "price": "150",
-      "image":
-          "https://dushkaburger.com/wp-content/uploads/2026/01/friends.jpg",
-    },
-    {
-      "name": "كومبو التوفير",
-      "price": "85",
-      "image": "https://dushkaburger.com/wp-content/uploads/2026/01/saver.jpg",
-    },
-  ];
+    final result = await getCategoriesUseCase(const NoParams());
+
+    result.fold((failure) => emit(CategoryError(failure.message)), (
+      categories,
+    ) {
+      _categories = categories;
+      if (categories.isNotEmpty) {
+        changeTab(0);
+      } else {
+        emit(CategoryLoaded(categories: [], selectedIndex: 0, products: []));
+      }
+    });
+  }
 
   void changeTab(int index) {
-    if (index == 0) {
-      emit(CategoryUpdated(selectedIndex: 0, products: _dushkaOffers));
-    } else {
-      emit(CategoryUpdated(selectedIndex: 1, products: _appOffers));
+    if (index >= 0 && index < _categories.length) {
+      final category = _categories[index];
+      emit(
+        CategoryLoaded(
+          categories: _categories,
+          selectedIndex: index,
+          products: category.products,
+        ),
+      );
     }
   }
 }

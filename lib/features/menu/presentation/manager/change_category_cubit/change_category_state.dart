@@ -1,11 +1,25 @@
 part of 'change_category_cubit.dart';
+
 abstract class CategoryState {}
 
 class CategoryInitial extends CategoryState {}
 
-class CategoryUpdated extends CategoryState {
-  final int selectedIndex;
-  final List<Map<String, String>> products;
+class CategoryLoading extends CategoryState {}
 
-  CategoryUpdated({required this.selectedIndex, required this.products});
+class CategoryLoaded extends CategoryState {
+  final List<CategoryEntity> categories;
+  final int selectedIndex;
+  final List<ProductEntity> products;
+
+  CategoryLoaded({
+    required this.categories,
+    required this.selectedIndex,
+    required this.products,
+  });
+}
+
+class CategoryError extends CategoryState {
+  final String message;
+
+  CategoryError(this.message);
 }
